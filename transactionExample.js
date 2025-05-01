@@ -9,7 +9,7 @@ async function doTransaction() {
         const studentId = 'S10721002';
         const newDepartmentId = 'BA001';
 
-        // 檢查學號是否存在，並直接獲取學生資料
+        // 檢查學號
         const checkQuery = 'SELECT * FROM STUDENT WHERE Student_ID = ?';
         const result = await conn.query(checkQuery, [studentId]);
         if (!result || result.length === 0) {
@@ -20,11 +20,11 @@ async function doTransaction() {
         const updateStudent = 'UPDATE STUDENT SET Department_ID = ? WHERE Student_ID = ?';
         await conn.query(updateStudent, [newDepartmentId, studentId]);
 
-        // 提交交易
+        // // 如果以上操作都成功，則提交交易
         await conn.commit();
         console.log('交易成功，已提交');
 
-        // 查詢該學生當前系別
+        // 查詢學生目前系別
         const updatedResult = await conn.query(checkQuery, [studentId]);
         const updatedStudent = updatedResult[0];
 
