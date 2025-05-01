@@ -20,7 +20,7 @@ async function doTransaction() {
         const updateStudent = 'UPDATE STUDENT SET Department_ID = ? WHERE Student_ID = ?';
         await conn.query(updateStudent, [newDepartmentId, studentId]);
 
-        // // 如果以上操作都成功，則提交交易
+        // 如果以上操作都成功，則提交交易
         await conn.commit();
         console.log('交易成功，已提交');
 
